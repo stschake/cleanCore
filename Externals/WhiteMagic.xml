@@ -1,0 +1,526 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WhiteMagic</name>
+    </assembly>
+    <members>
+        <member name="T:WhiteMagic.Internals.PatchManager">
+            <summary>
+            A manager class to handle memory patches.
+            </summary>
+        </member>
+        <member name="T:WhiteMagic.Internals.Manager`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:WhiteMagic.Internals.Manager`1.Applications">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Internals.Manager`1.ApplyAll">
+            <summary>
+            Applies all the IMemoryOperations contained in this manager via their Apply() method.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Internals.Manager`1.RemoveAll">
+            <summary>
+            Removes all the IMemoryOperations contained in this manager via their Remove() method.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Internals.Manager`1.DeleteAll">
+            <summary>
+            Deletes all the IMemoryOperations contained in this manager.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Internals.Manager`1.Delete(System.String)">
+            <summary>
+            Deletes a specific IMemoryOperation contained in this manager, by name.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:WhiteMagic.Internals.Manager`1.Win32">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Internals.Manager`1.Item(System.String)">
+            <summary>
+            Retrieves an IMemoryOperation by name.
+            </summary>
+            <param name="name">The name given to the IMemoryOperation</param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Internals.PatchManager.Create(System.IntPtr,System.Byte[],System.String)">
+            <summary>
+            Creates a new <see cref="T:WhiteMagic.Internals.Patch"/> at the specified address.
+            </summary>
+            <param name="address">The address to begin the patch.</param>
+            <param name="patchWith">The bytes to be written as the patch.</param>
+            <param name="name">The name of the patch.</param>
+            <returns>A patch object that exposes the required methods to apply and remove the patch.</returns>
+        </member>
+        <member name="M:WhiteMagic.Internals.PatchManager.CreateAndApply(System.IntPtr,System.Byte[],System.String)">
+            <summary>
+            Creates a new <see cref="T:WhiteMagic.Internals.Patch"/> at the specified address, and applies it.
+            </summary>
+            <param name="address">The address to begin the patch.</param>
+            <param name="patchWith">The bytes to be written as the patch.</param>
+            <param name="name">The name of the patch.</param>
+            <returns>A patch object that exposes the required methods to apply and remove the patch.</returns>
+        </member>
+        <member name="T:WhiteMagic.Internals.Patch">
+            <summary>
+            Contains methods, and information for a memory patch.
+            </summary>
+        </member>
+        <member name="T:WhiteMagic.Internals.IMemoryOperation">
+            <summary>
+            Represents an operation in memory, be it a patch, detour, or anything else.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Internals.IMemoryOperation.Remove">
+            <summary>
+            Removes this IMemoryOperation from memory. (Reverts the bytes back to their originals.)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Internals.IMemoryOperation.Apply">
+            <summary>
+            Applies this IMemoryOperation to memory. (Writes new bytes to memory)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:WhiteMagic.Internals.IMemoryOperation.IsApplied">
+            <summary>
+            Returns true if this IMemoryOperation is currently applied.
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Internals.IMemoryOperation.Name">
+            <summary>
+            Returns the name for this IMemoryOperation.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Internals.Patch.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:WhiteMagic.Internals.Patch.Remove">
+            <summary>
+            Removes this Patch from memory. (Reverts the bytes back to their originals.)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Internals.Patch.Apply">
+            <summary>
+            Applies this Patch to memory. (Writes new bytes to memory)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Internals.Patch.Finalize">
+            <summary>
+            Allows an <see cref="T:System.Object"/> to attempt to free resources and perform other cleanup operations before the <see cref="T:System.Object"/> is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Internals.Patch.IsApplied">
+            <summary>
+            Returns true if this Patch is currently applied.
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Internals.Patch.Name">
+            <summary>
+            Returns the name for this Patch.
+            </summary>
+        </member>
+        <member name="T:WhiteMagic.Internals.DetourManager">
+            <summary>
+            A manager class to handle function detours, and hooks.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Internals.DetourManager.Create(System.Delegate,System.Delegate,System.String)">
+            <summary>
+            Creates a new Detour.
+            </summary>
+            <param name="target">The original function to detour. (This delegate should already be registered via Magic.RegisterDelegate)</param>
+            <param name="newTarget">The new function to be called. (This delegate should NOT be registered!)</param>
+            <param name="name">The name of the detour.</param>
+            <returns>A <see cref="T:WhiteMagic.Internals.Detour"/> object containing the required methods to apply, remove, and call the original function.</returns>
+        </member>
+        <member name="M:WhiteMagic.Internals.DetourManager.CreateAndApply(System.Delegate,System.Delegate,System.String)">
+            <summary>
+            Creates and applies new Detour.
+            </summary>
+            <param name="target">The original function to detour. (This delegate should already be registered via Magic.RegisterDelegate)</param>
+            <param name="newTarget">The new function to be called. (This delegate should NOT be registered!)</param>
+            <param name="name">The name of the detour.</param>
+            <returns>A <see cref="T:WhiteMagic.Internals.Detour"/> object containing the required methods to apply, remove, and call the original function.</returns>
+        </member>
+        <member name="T:WhiteMagic.Internals.Detour">
+            <summary>
+            Contains methods, and information for a detour, or hook.
+            </summary>
+        </member>
+        <member name="F:WhiteMagic.Internals.Detour._hookDelegate">
+            <summary>
+            This var is not used within the detour itself. It is only here
+            to keep a reference, to avoid the GC from collecting the delegate instance!
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Internals.Detour.Apply">
+            <summary>
+            Applies this Detour to memory. (Writes new bytes to memory)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Internals.Detour.Remove">
+            <summary>
+            Removes this Detour from memory. (Reverts the bytes back to their originals.)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Internals.Detour.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:WhiteMagic.Internals.Detour.CallOriginal(System.Object[])">
+            <summary>
+            Calls the original function, and returns a return value.
+            </summary>
+            <param name="args">The arguments to pass. If it is a 'void' argument list,
+            you MUST pass 'null'.</param>
+            <returns>An object containing the original functions return value.</returns>
+        </member>
+        <member name="M:WhiteMagic.Internals.Detour.Finalize">
+            <summary>
+            Allows an <see cref="T:System.Object"/> to attempt to free resources and perform other cleanup operations before the <see cref="T:System.Object"/> is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Internals.Detour.IsApplied">
+            <summary>
+            Returns true if this Detour is currently applied.
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Internals.Detour.Name">
+            <summary>
+            Returns the name for this Detour.
+            </summary>
+        </member>
+        <member name="T:WhiteMagic.Native.PeHeaderParser">
+            <summary>
+            A class to extract PE header information from modules or PE files.
+            </summary>
+        </member>
+        <member name="F:WhiteMagic.Native.PeHeaderParser.ModulePtr">
+            <summary>
+            The handle, or base address, to the current PE file.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Native.PeHeaderParser.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the PeHeaderParser class, using the specified path to a PE file.
+            </summary>
+            <param name="peFile"></param>
+        </member>
+        <member name="M:WhiteMagic.Native.PeHeaderParser.#ctor(System.IntPtr)">
+            <summary>
+            Creates a new instance of the PeHeaderParser class, using the handle or base address, to the specified module.
+            </summary>
+            <param name="hModule"></param>
+        </member>
+        <member name="P:WhiteMagic.Native.PeHeaderParser.DosHeader">
+            <summary>
+            Retrieves the IMAGE_DOS_HEADER for this PE file.
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Native.PeHeaderParser.NtHeader">
+            <summary>
+            Retrieves the IMAGE_NT_HEADER for this PE file. (This includes and nested structs, etc)
+            </summary>
+        </member>
+        <member name="T:WhiteMagic.Native.PeHeaderParser.PeHeaderConstants">
+            <summary>
+            Contains constants ripped from WinNT.h
+            </summary>
+        </member>
+        <member name="T:WhiteMagic.Native.Win32">
+            <summary>
+            A simplistic Win32 API wrapper class.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Native.Win32.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:WhiteMagic.Native.Win32.WriteBytes(System.IntPtr,System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="address"></param>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Native.Win32.ReadBytes(System.IntPtr,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="address"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WhiteMagic.Internals.PatternManager">
+            <summary>
+            Credits to Dominik, Patrick, Bobbysing, and whoever else I forgot, for most of the ripped code here!
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Internals.PatternManager.LoadFile(System.String,System.UInt32,System.UInt32)">
+            <summary>
+            Loads a pattern file.
+            </summary>
+            <param name="file">The full path to the file to be loaded. (XML files only!)</param>
+            <param name="start">The start address to begin scanning from.</param>
+            <param name="length">The length of data to scan.</param>
+        </member>
+        <member name="M:WhiteMagic.Internals.PatternManager.LoadFile(System.String,System.IntPtr)">
+            <summary>
+            Loads an XML pattern file, and scans a specific module.
+            </summary>
+            <param name="file">The full path to the file to be loaded. (XML files only!)</param>
+            <param name="hModule">The base address, or handle, to a module to scan. (Length/start will be calculated automatically)</param>
+        </member>
+        <member name="M:WhiteMagic.Internals.PatternManager.LoadFile(System.String)">
+            <summary>
+            Loads an XML pattern file, and scans the entry assembly. (The first module in the modules list)
+            </summary>
+            <param name="file">The full path to the file to be loaded. (XML files only!)</param>
+        </member>
+        <member name="P:WhiteMagic.Internals.PatternManager.Item(System.String)">
+            <summary>
+            Retrieves an address from the found patterns stash.
+            </summary>
+            <param name="name">The name of the pattern, as per the XML file provided in the constructor of this class instance.</param>
+            <returns></returns>
+        </member>
+        <member name="T:WhiteMagic.MissingAttributeException">
+            <summary>
+             An exception that is thrown when a struct, class, or delegate is missing proper attributes.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.MissingAttributeException.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.MissingAttributeException.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:WhiteMagic.MissingAttributeException.#ctor(System.String,System.Exception)">
+            <summary>
+            </summary>
+            <param name="message"></param>
+            <param name="inner"></param>
+        </member>
+        <member name="M:WhiteMagic.MissingAttributeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:WhiteMagic.Magic">
+            <summary>
+            The main memory library class. Just instantiate this class, and everything else you need is contained within.
+            Alternatively, you can use the Magic.Instance property, to grab a static instance of this class (singleton)
+            
+            I highly suggest tracking your own instances for fairly obvious reasons.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Magic.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:WhiteMagic.Magic"/> class.
+            </summary>
+        </member>
+        <member name="M:WhiteMagic.Magic.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:WhiteMagic.Magic.ReadBytes(System.IntPtr,System.Int32)">
+            <summary>
+            Reads a specific number of bytes from memory.
+            </summary>
+            <param name="address"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.ReadBytes(System.UInt32,System.Int32)">
+            <summary>
+            Reads a specific number of bytes from memory.
+            </summary>
+            <param name="address"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.Read``1(System.IntPtr[])">
+            <summary>
+            Reads a "T" from memory, using consecutive reading.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="addresses"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.Read``1(System.UInt32[])">
+            <summary>
+            Reads a "T" from memory, using consecutive reading.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="addresses"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.ReadStruct``1(System.IntPtr)">
+            <summary>
+            Reads a struct from memory. The struct must be attributed properly!
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="address"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.WriteBytes(System.IntPtr,System.Byte[])">
+            <summary>
+            Writes a set of bytes to memory.
+            </summary>
+            <param name="address"></param>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.WriteBytes(System.UInt32,System.Byte[])">
+            <summary>
+            Writes a set of bytes to memory.
+            </summary>
+            <param name="address"></param>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.Write``1(System.IntPtr,``0)">
+            <summary>
+            Writes a generic datatype to memory. (Note; only base datatypes are supported [int,float,uint,byte,sbyte,double,etc])
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="address"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.Write``1(System.UInt32,``0)">
+            <summary>
+            Writes a generic datatype to memory. (Note; only base datatypes are supported [int,float,uint,byte,sbyte,double,etc])
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="address"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.WriteStruct``1(System.IntPtr,``0)">
+            <summary>
+            Writes a struct to memory.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="address"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.WriteStruct``1(System.UInt32,``0)">
+            <summary>
+            Writes a struct to memory.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="address"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.GetObjectVtableFunction(System.IntPtr,System.UInt32)">
+            <summary>
+            Retrieves a function pointer, to an objects virtual function table.
+            </summary>
+            <param name="objectBase">The pointer to the object.</param>
+            <param name="functionIndex">The nth function to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.RegisterDelegate``1(System.UInt32)">
+            <summary>
+            Registers a function into a delegate. Note: The delegate must provide a proper function signature!
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="address"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.RegisterDelegate``1(System.IntPtr)">
+            <summary>
+            Registers a function into a delegate. Note: The delegate must provide a proper function signature!
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="address"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.LoadLibrary(System.String)">
+            <summary>
+            Win32 LoadLibrary
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.FreeLibrary(System.IntPtr)">
+            <summary>
+            Win32 FreeLibrary
+            </summary>
+            <param name="hLib"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.GetProcAddress(System.IntPtr,System.String)">
+            <summary>
+            Win32 GetProcAddress
+            </summary>
+            <param name="hModule"></param>
+            <param name="procedureName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WhiteMagic.Magic.GetProcAddress(System.String,System.String)">
+            <summary>
+            Loads a library, and gets a procedure address.
+            </summary>
+            <param name="fileName"></param>
+            <param name="procedureName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:WhiteMagic.Magic.Instance">
+            <summary>
+            Retrieves a static instance of the <see cref="T:WhiteMagic.Magic"/> class. (A singleton)
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Magic.Detours">
+            <summary>
+            Provides access to the DetourManager class, that allows you to create and remove
+            detours and hooks for functions. (Or any other use you may find...)
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Magic.Patches">
+            <summary>
+            Provides access to the PatchManager class, which allows you to apply and remove patches.
+            </summary>
+        </member>
+        <member name="P:WhiteMagic.Magic.Patterns">
+            <summary>
+            Provides access to the PatternsManager class, which allows you to load, and search for patterns in memory.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -13,4 +13,4 @@ the latter is considered safe; if you worry about the first one, deactivate even
 
 # License
 
-cleanCore is licensed under the Modified BSD License.
+cleanCore is licensed under the FreeBSD license or Simplified BSD license.

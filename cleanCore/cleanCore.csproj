@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4FD0CCE8-D493-4DF1-A308-A1385DD98245}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>cleanCore</RootNamespace>
+    <AssemblyName>cleanCore</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="WhiteMagic">
+      <HintPath>..\Externals\WhiteMagic.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuctionHouse\AuctionListType.cs" />
+    <Compile Include="AuctionHouse\WoWAuction.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="D3D\Direct3DAPI.cs" />
+    <None Include="D3D\Font.cs" />
+    <None Include="D3D\IResource.cs" />
+    <Compile Include="D3D\Pulse.cs" />
+    <Compile Include="Descriptors.cs" />
+    <Compile Include="Events.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="LuaInterface.cs" />
+    <Compile Include="Manager.cs" />
+    <Compile Include="Offsets.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="D3D\Rendering.cs" />
+    <Compile Include="Teleporter.cs" />
+    <Compile Include="UI\Inventory.cs" />
+    <Compile Include="UI\Merchant.cs" />
+    <Compile Include="WoWBag.cs" />
+    <Compile Include="WoWContainer.cs" />
+    <Compile Include="WoWCorpse.cs" />
+    <Compile Include="WoWDynamicObject.cs" />
+    <Compile Include="WoWGameObject.cs" />
+    <Compile Include="WoWItem.cs" />
+    <Compile Include="WoWLocalPlayer.cs" />
+    <Compile Include="WoWObject.cs" />
+    <Compile Include="WoWParty.cs" />
+    <Compile Include="WoWPlayer.cs" />
+    <Compile Include="WoWScript.cs" />
+    <Compile Include="WoWUnit.cs" />
+    <Compile Include="WoWWorld.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cleanPattern\cleanPattern.csproj">
+      <Project>{29464482-6061-4C6C-ACBE-B7340D0CE164}</Project>
+      <Name>cleanPattern</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
