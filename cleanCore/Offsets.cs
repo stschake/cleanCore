@@ -451,7 +451,7 @@ namespace cleanCore
 
                 {
                     var p = Pattern.FromTextstyle("CGUnit_C__UnitReaction",
-                                                  "55 8b ec 83 ec ?? 53 57 8b 7d ?? 8b d9 89 5d ?? 3b fb 75");
+                                                  "55 8b ec 83 ec 14 53 57 8b 7d 08 8b d9 85 ff 75 ?? 8d 47 01 5f 5b 8b e5 5d c2 04 00 3b fb 75 ??");
                     UnitReaction = p.Find();
                     log.WriteLine("UnitReaction: 0x" + UnitReaction.ToString("X"));
                 }
