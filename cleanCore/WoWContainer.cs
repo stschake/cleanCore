@@ -22,7 +22,7 @@ namespace cleanCore
 
         public ulong GetItemGuid(int index)
         {
-            if (index > 35 || index >= Slots || index <= 0)
+            if (index > 35 || index >= Slots || index < 0)
                 return 0;
 
             return GetDescriptor<ulong>((int) ContainerField.CONTAINER_FIELD_SLOT_1 + (index*8));
